@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <div class="container body-content span=8 offset=2">
+        <div class="well">
+            <form class="form-horizontal" action="{{ path('planet_create') }}" method="post">
+                <fieldset>
+                    <legend>New Planet</legend>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="planet_title">Planet Name</label>
+                        <div class="col-sm-4 ">
+                            <input type="text" class="form-control" id="planet_title" placeholder="Planet Name"
+                                   name="planet[name]">
+                        </div>
+                    </div>
+
+                    {{ form_row(form._token) }}
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <a class="btn btn-default" href="{{ path('planet_list') }}">Cancel</a>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+{% endblock %}

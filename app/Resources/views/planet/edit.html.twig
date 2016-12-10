@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <div class="container body-content span=8 offset=2">
+        <div class="well">
+            <form class="form-horizontal" action="{{ path('planet_edit', {id: planet.id}) }}" method="post">
+                <input type="hidden" name="planet[player]" value="{{ planet.playerId }}">
+                <fieldset>
+                    <legend>Edit Planet</legend>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="planet_title">Planet Name</label>
+                        <div class="col-sm-4 ">
+                            <input type="text" class="form-control" id="planet_title" placeholder="Planet Name"
+                                   name="planet[name]" value="{{ planet.name }}">
+                            <p class="help-block">Coordinates: X = {{ planet.getX() }}, Y = {{ planet.getY() }}</p>
+                        </div>
+                    </div>
+
+                    {{ form_row(form._token) }}
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <a class="btn btn-default" href="{{ path('planet_list') }}">Cancel</a>
+                            <button type="submit" class="btn btn-success">Edit</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+{% endblock %}
