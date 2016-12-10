@@ -18,11 +18,11 @@ public function __construct($environment, $debug)
 - Entity generation wizard console tool
 ```
 php bin/console doctrine:generate:entity
-SoftUniBlogBundle:Article
+AppBundle:Article
 ...
 ```
 
-Names of our tables should be pluralized, so - go to /src/SoftUniBlogBundle/Entity/Article.php and change this: @ORM\Table(name="articles")
+Names of our tables should be pluralized, so - go to /src/AppBundle/Entity/Article.php and change this: @ORM\Table(name="articles")
 
 - Create DB tables with Doctrine
 `php bin/console doctrine:schema:update --force`
