@@ -181,7 +181,7 @@ class Planet
     private $planetResources;
 
     /**
-     * @return mixed
+     * @return ArrayCollection
      */
     public function getPlanetResources()
     {

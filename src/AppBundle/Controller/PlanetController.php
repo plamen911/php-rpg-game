@@ -3,7 +3,10 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Planet;
+use AppBundle\Entity\PlanetResource;
+use AppBundle\Entity\Resource;
 use AppBundle\Form\PlanetType;
+use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -54,9 +57,22 @@ class PlanetController extends Controller
             $planet->setX(rand(1, 100));
             $planet->setY(rand(1, 100));
             $planet->setPlayer($this->getUser());
-
             $em->persist($planet);
             $em->flush();
+
+            // Set predefined amount of resources
+            $resources = $this->getDoctrine()->getRepository(Resource::class)->findAll();
+            /**
+             * @var \AppBundle\Entity\Resource $resource
+             */
+            foreach ($resources as $resource) {
+                $planetResource = new PlanetResource($planet->getId(), $resource->getId());
+                $planetResource->setAmount(0);
+                $planetResource->setPlanet($planet);
+                $planetResource->setResource($resource);
+                $em->persist($planetResource);
+                $em->flush();
+            }
 
             $this->addFlash('success', 'New planet successfully created.');
             return $this->redirectToRoute('planet_edit', array('id' => $planet->getId()));
@@ -99,6 +115,11 @@ class PlanetController extends Controller
         $form->handleRequest($request);
 
         $resources = $planet->getPlanetResources()->toArray();
+
+/*        foreach ($resources as $resource) {
+            $resource->setAmount(212);
+        }*/
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             if (!$form['name']->getData()) {

@@ -15,6 +15,35 @@ class PlanetResource
     /**
      * @var int
      *
+     * @ORM\Column(name="planet_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $planet_id;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="resource_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $resource_id;
+
+    /**
+     * PlanetResource constructor.
+     * @param int $planet_id
+     * @param int $resource_id
+     */
+    public function __construct($planet_id, $resource_id)
+    {
+        $this->planet_id = $planet_id;
+        $this->resource_id = $resource_id;
+    }
+
+    /**
+     * @var int
+     *
      * @ORM\Column(name="amount", type="integer")
      */
     private $amount;
