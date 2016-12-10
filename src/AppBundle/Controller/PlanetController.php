@@ -75,6 +75,9 @@ class PlanetController extends Controller
      */
     public function editAction($id = 0, Request $request)
     {
+        /**
+         * @var \AppBundle\Entity\Planet $planet
+         */
         $planet = $this->getDoctrine()->getRepository(Planet::class)->find($id);
 
         if ($planet === null) {
@@ -125,14 +128,37 @@ class PlanetController extends Controller
     public function deleteAction($id = 0, Request $request)
     {
         /**
+         * @var \AppBundle\Entity\Planet $planet
+         */
+        $planet = $this->getDoctrine()->getRepository(Planet::class)->find($id);
+
+        if ($planet === null) {
+            return $this->redirectToRoute('planet_list');
+        }
+
+        /**
          * @var \AppBundle\Entity\Player $user
          */
         $user = $this->getUser();
+        if (!$user->isPlanetOwner($planet)) {
+            return $this->redirectToRoute('planet_list');
+        }
 
-        return $this->render('planet/delete.html.twig');
+        $form = $this->createForm(PlanetType::class, $planet);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($planet);
+            $em->flush();
+
+            return $this->redirectToRoute('planet_list');
+        }
+
+        return $this->render('planet/delete.html.twig',
+            array(
+                'planet' => $planet,
+                'form' => $form->createView()
+            ));
     }
-
-
-
-
 }

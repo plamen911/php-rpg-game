@@ -23,8 +23,8 @@
                             <td>{{ planet.getName() }}</td>
                             <td>X = {{ planet.getX() }}, Y = {{ planet.getY() }}</td>
                             <td>
-                                <a href="{{ path('planet_edit', {'id': planet.id}) }}">Edit</a>
-                                <a href="{{ path('planet_delete', {'id': planet.id}) }}">Delete</a>
+                                <a href="{{ path('planet_edit', {'id': planet.id}) }}" class="btn btn-success btn-xs">Edit</a>
+                                <a href="{{ path('planet_delete', {'id': planet.id}) }}" class="btn btn-danger btn-xs">Delete</a>
                             </td>
                         </tr>
                     {% endfor %}

@@ -30,6 +30,11 @@
                     <ul class="nav navbar-nav navbar-right">
                         {% if app.user %}
                             <li>
+                                <a href="{{ path('planet_list') }}">
+                                    My Planets
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ path('player_profile') }}">
                                     My Profile
                                 </a>
