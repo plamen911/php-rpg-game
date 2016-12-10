@@ -75,7 +75,8 @@ class PlanetController extends Controller
             }
 
             $this->addFlash('success', 'New planet successfully created.');
-            return $this->redirectToRoute('planet_edit', array('id' => $planet->getId()));
+            // return $this->redirectToRoute('planet_edit', array('id' => $planet->getId()));
+            return $this->redirectToRoute('planet_list');
         }
 
         return $this->render('planet/create.html.twig',
@@ -116,11 +117,6 @@ class PlanetController extends Controller
 
         $resources = $planet->getPlanetResources()->toArray();
 
-/*        foreach ($resources as $resource) {
-            $resource->setAmount(212);
-        }*/
-
-
         if ($form->isSubmitted() && $form->isValid()) {
             if (!$form['name']->getData()) {
                 $this->addFlash('danger', 'Planet name cannot be empty.');
@@ -136,6 +132,7 @@ class PlanetController extends Controller
             $em->persist($planet);
             $em->flush();
 
+            $this->addFlash('success', 'Planet successfully updated.');
             return $this->redirectToRoute('planet_list');
         }
 
