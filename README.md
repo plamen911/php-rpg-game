@@ -43,3 +43,4 @@ Names of our tables should be pluralized, so - go to /src/AppBundle/Entity/Artic
 
 - `$this->addFlash('danger', 'Planet name cannot be empty');` - flash message types: success, info, warning, danger
 
+- http://stackoverflow.com/questions/15616157/doctrine-2-and-many-to-many-link-table-with-an-extra-field/15630665#15630665 - Doctrine 2 and Many-to-many link table with an extra field
