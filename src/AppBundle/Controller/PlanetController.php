@@ -99,6 +99,11 @@ class PlanetController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if (!$form['name']->getData()) {
+                $this->addFlash('danger', 'Planet name cannot be empty.');
+                return $this->redirectToRoute('planet_edit', array('id' => $id));
+            }
+
             $em = $this->getDoctrine()->getManager();
 
             $planet->setX($x);
