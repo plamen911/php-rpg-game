@@ -174,5 +174,26 @@ class Planet
     {
         $this->player = $player;
     }
+
+    // relations
+
+    /** @ORM\OneToMany(targetEntity="AppBundle\Entity\PlanetResource", mappedBy="planet") */
+    private $planetResources;
+
+    /**
+     * @return mixed
+     */
+    public function getPlanetResources()
+    {
+        return $this->planetResources;
+    }
+
+    /**
+     * @param mixed $planetResources
+     */
+    public function setPlanetResources($planetResources)
+    {
+        $this->planetResources = $planetResources;
+    }
 }
 

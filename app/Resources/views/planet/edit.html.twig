@@ -16,6 +16,17 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Resources</label>
+                        <div class="col-sm-4 ">
+                            <ul class="list-group">
+                                {% for resource in resources %}
+                                    <li class="list-group-item">{{ resource.getResource().getName() }}, Amount: {{ resource.getAmount() }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
                     {{ form_row(form._token) }}
 
                     <div class="form-group">

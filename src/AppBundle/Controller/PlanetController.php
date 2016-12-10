@@ -98,6 +98,8 @@ class PlanetController extends Controller
         $form = $this->createForm(PlanetType::class, $planet);
         $form->handleRequest($request);
 
+        $resources = $planet->getPlanetResources()->toArray();
+
         if ($form->isSubmitted() && $form->isValid()) {
             if (!$form['name']->getData()) {
                 $this->addFlash('danger', 'Planet name cannot be empty.');
@@ -119,7 +121,8 @@ class PlanetController extends Controller
         return $this->render('planet/edit.html.twig',
             array(
                 'planet' => $planet,
-                'form' => $form->createView()
+                'form' => $form->createView(),
+                'resources' => $resources
             ));
     }
 
